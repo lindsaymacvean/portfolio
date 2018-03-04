@@ -1,5 +1,5 @@
-Package: helloworld
-Version: 0.2
-Maintainer: King Foo
+Package: invotra-process-tracker
+Version: 1.0
+Maintainer: Invotra
 Architecture: all
-Description: hello world
+Description: This is a Java service to track and report on running processes

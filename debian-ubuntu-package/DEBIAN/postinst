@@ -1,1 +1,1 @@
-echo 'something'
+systemctl daemon-reload

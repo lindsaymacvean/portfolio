@@ -1,0 +1,16 @@
+[Unit]
+Description=Java Service to track Processes
+#https://stackoverflow.com/questions/21503883/spring-boot-application-as-a-service/22121547#22121547
+
+[Service]
+User=nobody
+# The configuration file application.properties should be here:
+WorkingDirectory=/usr/bin
+ExecStart=/usr/bin/java -Xmx256m -jar process_tracker.jar
+SuccessExitStatus=143
+TimeoutStopSec=10
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
