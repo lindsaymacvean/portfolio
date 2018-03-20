@@ -13,6 +13,7 @@ A Java based process tracker
 
 %install
 mkdir -p %{buildroot}/%{_bindir}
+mkdir -p /var/log/invotracker
 install -p -m 755 %{SOURCE0} %{buildroot}/%{_bindir}
 install -p -m 644 %{SOURCE1} /etc/systemd/system
 systemctl daemon-reload
