@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="net.logstash.log4j:jsonevent-layout:1.7" type="repository">
+    <properties maven-id="net.logstash.log4j:jsonevent-layout:1.7" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/jsonevent-layout-1.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/json-smart-1.1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-lang-2.6.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

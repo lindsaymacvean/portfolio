@@ -1,44 +1,54 @@
 package com.company;
 
-import java.io.BufferedReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Main {
 
+    /**
+     * Constructor method
+     *
+     */
     public static void main(String[] args) throws IOException {
-
-        try {
-            String line;
-            Process p = Runtime.getRuntime().exec("ps -e");
-            BufferedReader input =
-                    new BufferedReader(new InputStreamReader(p.getInputStream()));
-            while ((line = input.readLine()) != null) {
-                System.out.println(line); //<-- Parse data here.
+        // Set speed of iteration (default to once per second)
+        int speed = 1;
+        if (args.length > 0) {
+            try {
+                speed = Integer.parseInt(args[0]);
+            } catch (NumberFormatException e) {
+                System.err.println("Argument" + args[0] + " must be an integer speed in seconds.");
+                System.exit(1);
             }
-            input.close();
-        } catch (Exception err) {
-            err.printStackTrace();
         }
 
-        try (FileWriter file = new FileWriter("hello.txt")) {
-            String sb = "Somethingelse";
-            file.write(sb);
-        }
+        // Establish Shutdown hook
+        Runtime.getRuntime().addShutdownHook(new Thread()
+        {
+            @Override
+            public void run() {
+                System.out.println("Shutdown hook ran!");
+            }
+        });
 
+        // Instantiate a processes object to monitor processes
+        Processes processes = new Processes();
 
-	    // write your code here
-        Scanner sn = new Scanner(System.in);
-        System.out.println("Give me a size ");
-        int n = sn.nextInt();
-        ArrayList<Integer> list = new ArrayList<Integer>();
-        while (true){
-            System.out.println("Give me a number ");
-            int in = sn.nextInt();
-            list.add(in);
+        // Loop on at the input 'speed' until exit signal
+        try {
+            while (true) {
+                // Refresh the process list
+                processes.getList();
+
+                // Parse Process list in Json into looping log file
+                processes.logToFile();
+
+                // Parse Process list via Data Model to Database
+                processes.logToDB();
+
+                // Start again at the currently set speed
+                Thread.sleep(speed * 1000);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }
