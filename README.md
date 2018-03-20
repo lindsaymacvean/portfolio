@@ -17,6 +17,11 @@ So once its installed try
 First create the Java jar artifact. I used IntelliJ to do this
 Second run `sudo ./build.sh` to create the installation packages
 
+## Java App
+Using log4j, go to /java-src/resources/log4j.properties to alter format of output log
+We are using the additional formatter for json https://github.com/logstash/log4j-jsonevent-layout
+And logging locally to /var/log/invotracker/processes.log
+
 ## Uninstall
 `sudo dnf remove invotra-process-tracker`
 `sudo apt-get remove invotra-process-tracker`
